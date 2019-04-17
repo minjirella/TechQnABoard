@@ -5,7 +5,11 @@
 	ID : <input type="text" name="id" onblur="move()"><br>
 	PW : <input type="password" name="pw"><br>
 	이름 : <input type="text" name="name"><br>
-	<input type="submit" value="회원가입"><br>
+	<input type="radio" name="deptno" value="100" checked="checked" />고객
+	<input type="radio" name="deptno" value="10"/> SW지원부
+	<input type="radio" name="deptno" value="20"/> HW지원부
+	<input type="radio" name="deptno" value="30"/> 고객지원부 <br>
+	<input type="submit" value="회원가입">
 	<input type="reset" value="정정">
 </form>
 

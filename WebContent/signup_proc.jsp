@@ -6,20 +6,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	request.setCharacterEncoding("utf-8");
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 	String name = request.getParameter("name");
+	int deptno = Integer.parseInt(request.getParameter("deptno"));
 	
 	try {
 		DBManager db = DBManager.getInstance();
 		Connection con = db.open();
 					
 		// 4. 실행준비
-		String sql = "insert into member values (?, ?, ?)";
+		String sql = "insert into member values (?, ?, ?, ?)";
 		PreparedStatement stmt = con.prepareStatement(sql);
 		stmt.setString(1, id);
 		stmt.setString(2, pw);
 		stmt.setString(3, name);
+		stmt.setInt(4, deptno);
 		
 		// 5. 쿼리 실행
 		//stmt.executeQuery(); //select 일때는 이걸씁니다.
@@ -27,7 +30,11 @@
 		if(result == 1) out.println("회원가입이 완료되었습니다.");
 		
 		// 6. select 일경우, 결과값을 저장할 내용 추가.
-				
+%>
+		<br>
+		<a href=signup.jsp>이전화면</a><br>
+		<a href=signin.jsp>로그인</a>
+<%
 	} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 	}

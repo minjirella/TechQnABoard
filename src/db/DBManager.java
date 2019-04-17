@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBManager {
-	private String url = "jdbc:mysql://localhost:3306/jsp";
+	private String url = "jdbc:mysql://localhost:3306/tech";
 	private String id = "root";
 	private String pw = "jj1234";
 	private Connection con = null;

@@ -77,6 +77,7 @@
 			String content = rs.getString("content");
 			int hit = rs.getInt("hit");
 			String id2 = rs.getString("id2");
+			
 			//절대 경로  http://localhost/JSPBoard/view.jsp?id=1
 			//상대 경로  view.jsp?id=1
 			out.println("<li>");

@@ -31,8 +31,17 @@
 			session.setAttribute("id", id);
 		}
 		
-		if(isOk) out.println("로그인되었습니다.");
-		else out.println("다시 로그인 해주세요.");
+		if(isOk) {
+			out.println("로그인되었습니다.<br>");
+			out.println("<a href=signin.jsp>로그인</a><br>");
+			out.println("<a href=write.jsp>글쓰기</a>");
+		}
+		
+		else {
+			out.println("다시 로그인 해주세요.<br>");
+			out.println("<a href=signin.jsp>로그인</a><br>");
+			out.println("<a href=signup.jsp>회원가입</a>");
+		}
 		
 	} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
