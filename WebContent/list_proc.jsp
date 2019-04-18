@@ -6,28 +6,20 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="http://localhost:8080/TechQnABoard/css/list_proc.css" type="text/css">
 <style>
-	body {
+	body{
 		text-align:center;
-	}
-	section {
-		margin:10px;
-	}
-	
-	ul{
-		padding:0;
-	}
-	li {
-		display:block;
-	}
-	
-	a{
-		text-decoration: none;
-		color:black;
-	}
-	
-	a:hover{
-		color:purple;
 	}
 </style>
 <%
@@ -68,24 +60,29 @@
 		ResultSet rs2 = stmt2.executeQuery();
 		
 %>
-	<ul>
+	<div class="card">
 <%
 		// 6. select로 로그인 결과값 확인
-		while(rs.next()){
+		while (rs.next()) {
 			int id = rs.getInt("id");
 			String title = rs.getString("title");
 			String content = rs.getString("content");
 			int hit = rs.getInt("hit");
 			String id2 = rs.getString("id2");
-			
 			//절대 경로  http://localhost/JSPBoard/view.jsp?id=1
 			//상대 경로  view.jsp?id=1
-			out.println("<li>");
-			out.println("<a href=view.jsp?id=" + id + ">" + id + "/" + title + "/" + id2 + "</a>");
-			out.println("</li>");
+%>
+			<div class="card-body">
+ 		    	<h4 class="card-title"><%=title%></h4>
+ 		    	<p class="card-text"><%=content%></p>
+ 		    	<a href="view.jsp?id=<%=id%>" class="btn btn-primary">
+ 		    		<%=id%>
+ 		    	</a>
+			</div>
+<%
 		}
 %>
-	</ul>
+	</div>
 <%
 		if(rs2.next()) total = rs2.getInt("total");
 		
@@ -100,13 +97,23 @@
 		
 		if(endPage > totalPage) endPage = totalPage;
 %>
-		<section>
+	<ul class="pagination">
 <%
 		for(int i=startPage; i<=endPage; i++){
-			out.println("<a href=list_proc.jsp?page="+ i + ">"+ i +"</a>");
+			if(pageNum == i){
+%>
+				<li class="page-item active"><a class="page-link"
+					href="list_proc.jsp?page=<%=i%>"><%=i%></a></li>
+<%
+				continue;
+			}
+%>
+			<li class="page-item"><a class="page-link"
+				href="list_proc.jsp?page=<%=i%>"><%=i%></a></li>
+<%
 		}
 %>
-		</section>
+	</ul>
 		<section>
 		<button type="button" onclick="location='write.jsp'">글쓰기</button>
 		</section>

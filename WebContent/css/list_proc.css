@@ -1,0 +1,27 @@
+body {
+	text-align: center;
+}
+
+.card-body > * {
+	display: inline-block;
+}
+
+section {
+	margin: 10px;
+}
+
+ul {
+	padding: 0;
+}
+
+li {
+	display: block;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	color: purple;

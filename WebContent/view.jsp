@@ -8,6 +8,10 @@
     pageEncoding="UTF-8"%>
 <%
 	String id = request.getParameter("id");
+	String userId = (String) session.getAttribute("id");
+%>
+	<p>현재 사용자 : <%=userId%></p>
+<%
 	try {
 		DBManager db = DBManager.getInstance();
 		Connection con = db.open();
@@ -33,16 +37,20 @@
 			String title = rs.getString("title");
 			String content = rs.getString("content");
 			int hit = rs.getInt("hit");
-			String id2 = rs.getString("id2");
+			String writer = rs.getString("id2");
 %>
 		<h1> <%=title %> / <%=num %></h1>
 		<p><%=content %></p>
 		<p><%=hit %></p>
-		<p><%=id2 %></p>
+		<p><%=writer%></p>
 		<button type="button" onclick="location='update.jsp?id=<%=id%>'">수정</button>
-		<button type="button" onclick="del()">삭제</button>
+<%
+			if (userId.equals(writer)){
+				out.println("<button type='button' onclick='del()'>삭제</button>");
+			}else out.println("<button type='button' onclick='warn()'>삭제</button>");
+
+%>	
 		<!-- TODO 밑에 목록보기를 만들어주고싶다! -->
-		
 		
 <%
 		}
@@ -52,11 +60,17 @@
 	}
 	
 %>
+		댓글 <input type="text" id="comment" name="comment">
+		<button type="button" onclick="writeComment()">작성</button>
 <script>
 	function del() {
 		var isOk = confirm("삭제?");
 		if(isOk){
 			location = 'delete_proc.jsp?id=<%=id%>';
 		}
+	}
+	
+	function warn() {
+		alert("권한이 없습니다.");
 	}
 </script>

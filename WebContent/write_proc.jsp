@@ -16,7 +16,7 @@
 		Connection con = db.open();
 
 		// 4. 실행준비
-		String sql = "insert into article values (null, null, ?, ?, 0, ?)";
+		String sql = "insert into article values (null, ?, ?, 0, ?)";
 		PreparedStatement stmt = con.prepareStatement(sql);
 		stmt.setString(1, title);
 		stmt.setString(2, content);

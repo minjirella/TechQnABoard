@@ -29,11 +29,14 @@
 			String id2 = rs.getString("id2");
 %>
 
-	<form method="post" action="update_proc.jsp">
-		제목 : <input type="text" name="title" value="<%=title%>"><br>
-		내용 : <textarea name="content"><%=content%></textarea><br>
+	<form method="post" action="reply_proc.jsp">
+		제목 : <input type="text" name="title" value="답변 : <%=title%>"><br>
+		내용 : <textarea name="content">
+				<%=content%>
+				=======답변글=======			
+			</textarea><br>
 		<input type="hidden" name="id" value="<%=id%>">
-		<input type="submit" value="수정완료"><br>
+		<input type="submit" value="답변하기"><br>
 		<input type="reset" value="정정">
 	</form>
 
