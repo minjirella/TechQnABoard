@@ -43,16 +43,15 @@
 		<p><%=content %></p>
 		<p><%=hit %></p>
 		<p><%=writer%></p>
-		<button type="button" onclick="location='update.jsp?id=<%=id%>'">수정</button>
-<%
-			if (userId.equals(writer)){
-				out.println("<button type='button' onclick='del()'>삭제</button>");
-			}else out.println("<button type='button' onclick='warn()'>삭제</button>");
-
-%>	
-		<!-- TODO 밑에 목록보기를 만들어주고싶다! -->
 		
 <%
+			if (userId.equals(writer)){
+				out.println("<button type='button' onclick='uptContent()'>수정</button>");
+				out.println("<button type='button' onclick='del()'>삭제</button>");
+			}else {
+				out.println("<button type='button' onclick='warn()'>수정</button>");
+				out.println("<button type='button' onclick='warn()'>삭제</button>");
+			}
 		}
 		
 	} catch (ClassNotFoundException | SQLException e) {
@@ -62,7 +61,12 @@
 %>
 		댓글 <input type="text" id="comment" name="comment">
 		<button type="button" onclick="writeComment()">작성</button>
+
 <script>
+	function uptContent(){
+		location = 'update.jsp?id=<%=id%>';
+	}
+	
 	function del() {
 		var isOk = confirm("삭제?");
 		if(isOk){
@@ -72,5 +76,20 @@
 	
 	function warn() {
 		alert("권한이 없습니다.");
+	}
+
+	
+	function writeComment() {
+		$.ajax({
+			url: 'write_comment.jsp',
+			type: 'post',
+			data: {
+				'comment': $('#comment').val(),
+				'id': '<%=id%>'
+			},
+			success: function(res){
+				
+			}
+		})
 	}
 </script>
