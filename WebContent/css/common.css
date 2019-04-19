@@ -1,3 +1,11 @@
+body{
+	margin:20px;
+}
+
+#mainTitle{
+	text-align:left;
+}
+
 .header {
 	text-align: right;
 }

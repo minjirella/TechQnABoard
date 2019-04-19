@@ -2,6 +2,10 @@ body {
 	text-align: center;
 }
 
+.card {
+	margin:10px 0px;
+}
+
 .card-body > * {
 	display: inline-block;
 }
@@ -26,3 +30,76 @@ a {
 
 a:hover {
 	color: purple;
+	text-decoration: none;
+}
+
+.card, .card .card-header, .card .card-body {
+	border: 0.1px solid gray;
+	border-width: 1px 0;
+	border-collapse: collapse;
+	text-align: center;
+	padding:8px;
+}
+
+.card-header {
+	height: 45px;
+}
+
+.card-text{
+	width: 10%;
+}
+
+.card-title{
+	width:60%;
+}
+
+.card-writer{
+	width:15%;
+}
+
+.card-btn, .card-issue {
+	width:15%;
+}
+
+.card-body {
+	display: inline-flex;
+}
+
+.card .card-header {
+	background-color: #999;
+	color: #fff;
+	border-width:2px 0;
+	display: inline-flex;
+}
+
+.card-header > * {
+	font-size: 1.1em;
+}
+
+.card-btn {
+	color: #fff;
+    font-weight: 400;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.todo{
+	background-color: #007bff;
+}
+
+.inprogress{
+	background-color: sandybrown;
+}
+
+.complete{
+	background-color: green;
+}
+
+.upgrade{
+	background-color: grey;
+}

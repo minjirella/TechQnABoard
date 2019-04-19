@@ -1,0 +1,30 @@
+form{
+	width: 400px;
+	text-align: center;
+	display: inline-block;
+}
+
+#idCheck{
+	width: 230px;
+	position: fixed;
+}
+
+p{
+	margin: 10px 2px;
+    display: inline-block;
+    width: 50px;
+}
+
+div{
+	margin: 10px 0px;
+}
+
+#buttons > * {
+	margin: 0px 20px;
+}
+
+
+
+
+
+

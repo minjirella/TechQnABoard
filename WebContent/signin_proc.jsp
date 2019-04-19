@@ -34,7 +34,8 @@
 		if(isOk) {
 			out.println("로그인되었습니다.<br>");
 			out.println("<a href=signin.jsp>로그인</a><br>");
-			out.println("<a href=write.jsp>글쓰기</a>");
+			out.println("<a href=write.jsp>이슈등록</a><br>");
+			out.println("<a href=list_proc.jsp>이슈목록이동</a>");
 		}
 		
 		else {
