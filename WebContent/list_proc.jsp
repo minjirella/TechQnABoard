@@ -3,7 +3,6 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="db.DBManager"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -16,12 +15,17 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" href="http://localhost:8080/TechQnABoard/css/common.css" type="text/css">
 <link rel="stylesheet" href="http://localhost:8080/TechQnABoard/css/list_proc.css" type="text/css">
-<style>
-	body{
-		text-align:center;
-	}
-</style>
+
+<%
+	String userId = (String) session.getAttribute("id");
+%>
+	<header class="header">
+		<p>현재 사용자 : <%=userId%></p>
+		<button type="button" onclick="location='signin.jsp'">로그인</button>
+		<button type="button" onclick="location='signup.jsp'">회원가입</button>
+	</header>
 <%
 	String pageStr = request.getParameter("page");
 	int pageNum = 0;
@@ -60,7 +64,7 @@
 		ResultSet rs2 = stmt2.executeQuery();
 		
 %>
-	<div class="card">
+		<div class="card">
 <%
 		// 6. select로 로그인 결과값 확인
 		while (rs.next()) {
@@ -82,7 +86,7 @@
 <%
 		}
 %>
-	</div>
+		</div>
 <%
 		if(rs2.next()) total = rs2.getInt("total");
 		
@@ -97,7 +101,7 @@
 		
 		if(endPage > totalPage) endPage = totalPage;
 %>
-	<ul class="pagination">
+	<ul id="pagination">
 <%
 		for(int i=startPage; i<=endPage; i++){
 			if(pageNum == i){

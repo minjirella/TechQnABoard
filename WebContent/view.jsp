@@ -6,11 +6,17 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="http://localhost:8080/TechQnABoard/css/common.css" type="text/css">
+    
 <%
 	String id = request.getParameter("id");
 	String userId = (String) session.getAttribute("id");
 %>
-	<p>현재 사용자 : <%=userId%></p>
+	<header class="header">
+		<p>현재 사용자 : <%=userId%></p>
+		<button type="button" onclick="location='signin.jsp'">로그인</button>
+		<button type="button" onclick="location='signup.jsp'">회원가입</button>
+	</header>
 <%
 	try {
 		DBManager db = DBManager.getInstance();
@@ -59,9 +65,15 @@
 	}
 	
 %>
-		댓글 <input type="text" id="comment" name="comment">
+	<section>
+		<p>댓글</p>
+		<input type="text" id="comment" name="comment">
 		<button type="button" onclick="writeComment()">작성</button>
+	</section>
+	<article class="commList">
+	</article>
 
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
 	function uptContent(){
 		location = 'update.jsp?id=<%=id%>';
@@ -81,15 +93,21 @@
 	
 	function writeComment() {
 		$.ajax({
-			url: 'write_comment.jsp',
-			type: 'post',
+			url: "write_comment.jsp",
+			type: "post",
 			data: {
-				'comment': $('#comment').val(),
-				'id': '<%=id%>'
+				"comment": $("#comment").val(),
+				"id": "<%=id%>"
 			},
 			success: function(res){
+				console.log(res.result)
 				
+				if(res.result > 0){
+					$(".commList").load("view_comment.jsp?id=<%=id%>");
+				}
 			}
 		})
 	}
+	
+	$(".commList").load("view_comment.jsp?id=<%=id%>");
 </script>

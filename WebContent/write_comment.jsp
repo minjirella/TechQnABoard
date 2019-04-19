@@ -3,38 +3,27 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="db.DBManager"%>
-<% request.setCharacterEncoding("utf-8"); %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="application/json; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<% request.setCharacterEncoding("utf-8"); %>
 <%
 	String id = request.getParameter("id");
 	String comment = request.getParameter("comment");
-	String commWriter = (String) session.getAttribute("id");
+	String userId = (String) session.getAttribute("id");
 	
 	try {
 		DBManager db = DBManager.getInstance();
 		Connection con = db.open();
 
-		// 4. 실행준비
-		String sql = "insert into comment values (null, ?, ?, sysdate(), ?)";
+		// 댓글 Insert
+		String sql = "insert into comment values (null, ?, ?, ?, now())";
 		PreparedStatement stmt = con.prepareStatement(sql);
-		stmt.setString(1, comment);
-		stmt.setString(2, id);
-		stmt.setString(3, commWriter);
-		
-		// 5. 쿼리 실행
-		//stmt.executeQuery(); //select 일때는 이걸씁니다.
+		stmt.setString(1, id);
+		stmt.setString(2, userId);
+		stmt.setString(3, comment);
 		int result = stmt.executeUpdate();
-		if(result >= 1) {
-			out.println("작성이 완료되었습니다. <br>");
-			out.println("<a href=list_proc.jsp>목록으로</a>");
-		}
-		else {
-			out.println("작성실패 <br>");
-			out.println("<a href=write.jsp>이전으로</a>");
-		}
-
-		// TODO - Response 해보기
+		out.println("{\"result\":" + result + "}");
 		
 		// 6. select 일경우, 결과값을 저장할 내용 추가.
 	} catch (ClassNotFoundException | SQLException e) {

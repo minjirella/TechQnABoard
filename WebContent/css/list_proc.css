@@ -12,6 +12,7 @@ section {
 
 ul {
 	padding: 0;
+	display:inline-flex;
 }
 
 li {
